@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>New Vision English School</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    h1 {
+      text-align: center;
+    }
+    form {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    input[type="text"],
+    input[type="number"] {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .student-card {
+      display: flex;
+      align-items: center;
+      margin-top: 20px;
+    }
+    .student-card img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+    .student-details {
+      flex-grow: 1;
+    }
+  </style>
+</head>
+<body>
+  <h1>New Vision English School</h1>
+
+  <h2>Student Details</h2>
+
+  <form id="studentForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" required>
+
+    <label for="age">Age:</label>
+    <input type="number" id="age" required>
+
+    <label for="grade">Grade:</label>
+    <input type="text" id="grade" required>
+
+    <label for="photo">Photo:</label>
+    <input type="file" id="photo">
+
+    <button type="submit">Add Student</button>
+  </form>
+
+  <h2>Registered Students</h2>
+
+  <div id="studentList"></div>
+
+  <script>
+    function addStudent(event) {
+      event.preventDefault();
+
+      var name = document.getElementById("name").value;
+      var age = document.getElementById("age").value;
+      var grade = document.getElementById("grade").value;
+      var photo = document.getElementById("photo").value;
+
+      var studentCard = document.createElement("div");
+      studentCard.classList.add("student-card");
+
+      var studentPhoto = document.createElement("img");
+      studentPhoto.src = photo ? URL.createObjectURL(photo) : "default-photo.jpg";
+      studentCard.appendChild(studentPhoto);
+
+      var studentDetails = document.createElement("div");
+      studentDetails.classList.add("student-details");
+
+      var studentName = document.createElement("p");
+      studentName.innerText = "Name: " + name;
+      studentDetails.appendChild(studentName);
+
+      var studentAge = document.createElement("p");
+      studentAge.innerText = "Age: " + age;
+      studentDetails.appendChild(studentAge);
+
+      var studentGrade = document.createElement("p");
+      studentGrade.innerText = "Grade: " + grade;
+      studentDetails.appendChild(studentGrade);
+
+      studentCard.appendChild(studentDetails);
+
+      document.getElementById("studentList").appendChild(studentCard);
+
+      document.getElementById("studentForm").reset();
+    }
+
+    document.getElementById("studentForm").addEventListener("submit", addStudent);
+  </script>
+</body>
+</html>
